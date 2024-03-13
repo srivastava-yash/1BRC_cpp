@@ -33,7 +33,7 @@ main(int argc, const char **argv) {
         filename = argv[1];
     }
     
-    std::vector<City> city_arr(420);
+    std::vector<City> city_arr(500);
     std::unordered_map<std::string, int> mp;
     int cur = 0;
 
@@ -68,14 +68,16 @@ main(int argc, const char **argv) {
         return a.name < b.name;
     });
     
-    for(int i=0;i<cur;i++) {
-        printf("%s=%0.1f/%0.1f/%0.1f%s", 
+    for(int i=0;i<500;i++) {
+        if(city_arr[i].name.size() != 0) {
+            printf("%s=%0.1f/%0.1f/%0.1f%s", 
                 city_arr[i].name.c_str(), 
                 city_arr[i].min, 
                 city_arr[i].sum / city_arr[i].count, 
                 city_arr[i].max,
-                i == cur-1 ? "" : ", "
-       );
+                i == 499 ? "" : ", "
+            );
+        }
     }
     std::cout<<"\n";
 
@@ -84,7 +86,8 @@ main(int argc, const char **argv) {
     std::chrono::duration<double, std::milli> time_span = std::chrono::duration_cast<std::chrono::duration<double, std::milli> >(end_time-start_time);
     double time_in_seconds = time_span.count() / 1000.0;
 
-    std::cout<<"Time Taken: "<<time_in_seconds<< " secs";
+    std::cout<<"Time Taken: "<<time_in_seconds<< " secs"<<std::endl;
+    std::cout<<"Time Taken: "<<time_in_seconds / 60.0 << " mins"<<std::endl;
 
     return 0; 
 }
